@@ -116,8 +116,25 @@ angular.module('cBoard').factory('sessionHelper', ["$rootScope", "$q", function 
 
 
 angular.module('cBoard').config(function ($httpProvider) {
+    // console.log($httpProvider.defaults.headers.common);
     $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded';
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+    // 设置 ajax 请求头
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+    // 设置超时处理
+    $httpProvider.interceptors.push(function($q,$window){
+        return {
+            'responseError':function(rejection){
+                if(rejection.status == 401){
+                    $window.location.href = 'login.do';
+                }
+                return $q.reject(rejection);
+            }
+        }
+    });
+
 
     // Override $http service's default transformRequest
     $httpProvider.defaults.transformRequest = [function (data) {

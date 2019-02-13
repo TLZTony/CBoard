@@ -42,7 +42,7 @@ CBoardEChartRender.prototype.chart = function (group, persist) {
         });
     }
 
-    if (options.legend.data && options.legend.data.length > 35) {
+    if (options.legend.data && options.legend.data.length > 50) { // 大于50不显示
         options.grid.top = '5%';
         options.legend.show =false;
     }

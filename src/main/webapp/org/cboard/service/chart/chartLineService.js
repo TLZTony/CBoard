@@ -52,7 +52,11 @@ cBoard.service('chartLineService', function ($state, $window) {
 
         for (var j = 0; aggregate_data[0] && j < aggregate_data[0].length; j++) {
             for (var i = 0; i < aggregate_data.length; i++) {
-                aggregate_data[i][j] = aggregate_data[i][j] ? Number(aggregate_data[i][j]) : 0;
+
+                if(!isNaN(aggregate_data[i][j])){
+                    aggregate_data[i][j] =  Number(aggregate_data[i][j]);
+                }
+
             }
         }
 
@@ -103,7 +107,8 @@ cBoard.service('chartLineService', function ($state, $window) {
         _.each(valueAxis, function (axis, index) {
             axis.axisLabel = {
                 formatter: function (value) {
-                    return numbro(value).format("0a.[0000]");
+                    /**return numbro(value).format("0a.[0000]"); */
+                    return numbro(value).format("0,0.[00]");
                 }
             };
             if (axis.series_type == "percentbar" || axis.series_type == "percentline") {
@@ -153,12 +158,16 @@ cBoard.service('chartLineService', function ($state, $window) {
                 formatter: function (params) {
                     var name = params[0].name;
                     var s = name + "</br>";
-                    for (var i = 0; i < params.length; i++) {
-                        s += '<span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:' + params[i].color + '"></span>';
-                        if (params[i].value instanceof Array) {
-                            s += params[i].seriesName + " : " + params[i].value[1] + "% (" + params[i].value[2] + ")<br>";
-                        } else {
-                            s += params[i].seriesName + " : " + params[i].value + "<br>";
+                    for (var i = 0; i < params.length; i++){
+
+                        if (params[i].value instanceof Array ) {
+                            s += '<span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:' + params[i].color + '"></span>';
+                            /** s += params[i].seriesName + " : " + params[i].value[1] + "% (" + params[i].value[2] + ")<br>"; */
+                           s += params[i].seriesName + " : " + numbro( params[i].value[1]).format("0,0[.]00")  + "% (" + numbro( params[i].value[2]).format("0,0[.]00")  + ")<br>";
+                        } else if(!isNaN(params[i].value)){
+                           /** s += params[i].seriesName + " : " + params[i].value + "<br>"; */
+                           s += '<span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:' + params[i].color + '"></span>';
+                           s += params[i].seriesName + " : " + numbro( params[i].value).format("0,0[.]00") + "<br>";
                         }
                     }
                     return s;
