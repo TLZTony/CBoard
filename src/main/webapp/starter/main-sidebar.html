@@ -97,6 +97,22 @@
                 </li>
             </ul>
         </li>
+
+        <!-- Extend-->
+        <li class="treeview" ui-sref-active="active" ng-if="isShowMenu('extend')">
+            <a>
+                <i class="fa fa-cog"></i>
+                <span>{{'SIDEBAR.EXTEND'|translate}}</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li ui-sref-active="active" ng-if="isShowMenu('extend.function_1')">
+                    <a ui-sref="extend.function_1"><i class="fa fa-fw fa-user"></i>{{'SIDEBAR.EXTEND_FUNCTION_1'|translate}}</a>
+                </li>
+            </ul>
+        </li>
     </ul>
     <!-- /.sidebar-menu -->
 </section>

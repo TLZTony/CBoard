@@ -74,7 +74,9 @@
     "USER_ADMIN": "用户管理",
     "RES_ADMIN": "资源管理",
     "JOB": "定时任务",
-    "SHARE_RESOURCE": "资源分享"
+    "SHARE_RESOURCE": "资源分享",
+    "EXTEND":"扩展",
+    "EXTEND_FUNCTION_1":"扩展功能1"
   },
   "HEADER": {
     "SIGN_OUT": "注销",

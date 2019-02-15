@@ -98,6 +98,17 @@ angular.module('cBoard').config(['$stateProvider', function ($stateProvider) {
             templateUrl: 'org/cboard/view/config/board/cockpit/view.html',
             controller: 'cockpitLayoutCtrl'
         })
+        .state('extend', {
+            url: '/extend',
+            abstract: true,
+            template: '<div ui-view></div>'
+        })
+        .state('extend.function_1', {
+            url: '/extend',
+            templateUrl: 'org/cboard/view/extend/function_1.html',
+            controller: 'extendFunction'
+        });
+
 }]);
 
 angular.module('cBoard').factory('sessionHelper', ["$rootScope", "$q", function ($rootScope, $q) {
