@@ -51,4 +51,15 @@ public class DimensionConfig extends ConfigComponent {
     public void setValues(List<String> values) {
         this.values = values;
     }
+
+    @Override
+    public String toString() {
+        return "DimensionConfig{" +
+                "columnName='" + columnName + '\'' +
+                ", filterType='" + filterType + '\'' +
+                ", values=" + values +
+                ", id='" + id + '\'' +
+                ", custom='" + custom + '\'' +
+                '}';
+    }
 }
