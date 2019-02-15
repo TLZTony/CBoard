@@ -31,7 +31,9 @@ public class MenuService {
         menuList.add(new DashboardMenu(8, 7, "SIDEBAR.USER_ADMIN", "admin.user"));
         menuList.add(new DashboardMenu(9, 1, "SIDEBAR.JOB", "config.job"));
         menuList.add(new DashboardMenu(10, 1, "SIDEBAR.SHARE_RESOURCE", "config.role"));
-
+        // 自定义扩展
+        menuList.add(new DashboardMenu(11,-1,"SIDERBAR.EXTEND","extend"));
+        menuList.add(new DashboardMenu(12,11,"SIDERBAR.EXTEND_FUNCTION_1","extend.function_1"));
     }
 
     public List<DashboardMenu> getMenuList() {
