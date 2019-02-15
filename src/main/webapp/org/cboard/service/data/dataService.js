@@ -160,7 +160,24 @@ cBoard.service('dataService', function ($http, $q, updateService) {
             cfg.rows = getDimensionConfig(chartConfig.keys);
             cfg.columns = getDimensionConfig(chartConfig.groups);
             cfg.filters = getDimensionConfig(chartConfig.filters);
-            cfg.filters = cfg.filters.concat(getDimensionConfig(chartConfig.boardFilters));
+
+            var boardFilters = getDimensionConfig(chartConfig.boardFilters);
+
+            if(boardFilters){
+                    for(var k = 0 ; k<boardFilters.length;k++ ){
+                        var size = 0;
+                        for(var i = 0 ;i<cfg.filters.length;i++){
+                            if(cfg.filters[i].columnName != boardFilters[k].columnName){
+                                size++;
+                            }
+                        }
+                        if(size == cfg.filters.length){
+                            cfg.filters =  cfg.filters.concat(boardFilters[k]);
+                        }
+                    }
+            }
+
+           // cfg.filters = cfg.filters.concat(getDimensionConfig(chartConfig.boardFilters));
             cfg.filters = cfg.filters.concat(getDimensionConfig(chartConfig.boardWidgetFilters));
             cfg.values = _.map(dataSeries, function (s) {
                 return {column: s.name, aggType: s.aggregate};

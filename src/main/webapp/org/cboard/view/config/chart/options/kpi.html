@@ -2,6 +2,7 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs tabs-left"><!-- 'tabs-right' for right tabs -->
         <li class="active"><a href="#ext" data-toggle="tab">Ext</a></li>
+        <li ><a href="#notes" data-toggle="tab">Notes</a></li>
     </ul>
 </div>
 <div class="col-xs-9 col-md-10">
@@ -38,6 +39,11 @@
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="tab-pane" id="notes">
+            <!-- /.note -->
+            <ng-include src="'org/cboard/view/config/chart/options/common/note.html'"></ng-include>
+            <!-- /.note -->
         </div>
     </div>
 </div>

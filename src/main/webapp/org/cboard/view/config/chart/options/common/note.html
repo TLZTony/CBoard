@@ -1,0 +1,25 @@
+<form class="form-horizontal">
+  <!--  <div class="row">
+        <div class="form-group col-md-12">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="curWidget.config.option.noteCustom"
+                           ng-init="curWidget.config.option.noteCustom ? null : curWidget.config.option.noteCustom=false"> Customize
+                </label>
+            </div>
+        </div>
+    </div>-->
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label class="col-md-2 control-label">备注内容</label>
+            <div class="col-md-10">
+                <textarea rows="5" id="note" name="note" class="form-control" ng-model="curWidget.config.option.note"
+                       placeholder="" />
+            </div>
+        </div>
+
+    </div>
+
+</form>
+
+<!--<script type="text/javascript">CKEDITOR.replace('note');</script>-->

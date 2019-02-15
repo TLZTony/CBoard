@@ -3,6 +3,9 @@ package org.cboard.dataprovider.util;
 import org.apache.commons.lang.StringUtils;
 import org.cboard.dataprovider.config.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.StringJoiner;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -48,8 +51,29 @@ public class SqlHelper {
     public String assembleAggDataSql(AggConfig config) throws Exception {
         Stream<DimensionConfig> c = config.getColumns().stream();
         Stream<DimensionConfig> r = config.getRows().stream();
+
         Stream<ConfigComponent> f = config.getFilters().stream();
-        Stream<ConfigComponent> filters = Stream.concat(Stream.concat(c, r), f);
+        List<DimensionConfig> sc_temp = Stream.concat(config.getColumns().stream(), config.getRows().stream()).collect(Collectors.toList());
+        Stream<DimensionConfig> sc = Stream.concat(config.getColumns().stream(), config.getRows().stream());
+
+//       // 图表内的限制大于表单限制
+        List<ConfigComponent> leftFilter = new ArrayList <>();
+        List<ConfigComponent> filterList = config.getFilters();
+
+        filterList.forEach(filterItem->{
+            final int[] size = {0};
+            sc_temp.forEach(scItem->{
+                if(!("=".equalsIgnoreCase(scItem.getFilterType()) && scItem.getColumnName().equalsIgnoreCase(((DimensionConfig)filterItem).getColumnName()) && scItem.getValues() != null && scItem.getValues().size() > 0 )){
+                    size[0]++;
+                }
+            });
+            if(size[0] == sc_temp.size()){
+                leftFilter.add(filterItem);
+            }
+        });
+
+        Stream<ConfigComponent> filters = Stream.concat(sc, leftFilter.stream());
+
         Stream<DimensionConfig> dimStream = Stream.concat(config.getColumns().stream(), config.getRows().stream());
 
         String dimColsStr = assembleDimColumns(dimStream);

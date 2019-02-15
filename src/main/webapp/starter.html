@@ -134,6 +134,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <link rel="stylesheet" href="plugins/colorpicker/bootstrap-colorpicker.min.css?v=20190131">
     <script src="plugins/colorpicker/bootstrap-colorpicker.min.js?v=20190131"></script>
+    <!-- ckeditor-->
+    <script src="plugins/ckeditor/ckeditor.js?v=20190131"></script>
+
     <style>
         .modal-fit .modal-dialog {
             left: 0;
@@ -303,6 +306,9 @@ desired effect
                 </div>
             </div>
             <div class="box-body" ng-style="{height:myheight+'px'}" style="padding: 3px 0px 3px 13px;">
+            </div>
+            <div class="box-footer"  style="padding: 3px 0px 3px 13px;" ng-show="(widget.widget.data.config.option.note == null || widget.widget.data.config.option.note == '') ? false:true">
+                {{widget.widget.data.config.option.note}}
             </div>
         </div>
     </div>
